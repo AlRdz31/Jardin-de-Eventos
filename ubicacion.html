@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ubicación</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .map-container {
+      height: 500px;
+      max-width: 100%;
+      margin: 30px auto;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    main {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body class="fade-out">
+
+  <header>Jardín de Eventos “La Palapita”</header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="ubicacion.html">Ubicación</a></li>
+      <li><a href="registros.html">Registros</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2 style="text-align: center; color: white;">Nuestra Ubicación</h2>
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1444.7218876646737!2d-100.64512021153598!3d23.65049653807708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8680a9c0b522473d%3A0xe0a1f25cad993abb!2sLa%20palapita.%20Jardin%20de%20eventos!5e0!3m2!1ses-419!2smx!4v1715731207084!5m2!1ses-419!2smx"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </main>
+
+  <footer>
+    <strong>La Palapita. Jardín de Eventos</strong><br>
+    Altamirano 204, Centro, 78700 Matehuala, S.L.P.<br>
+    Contacto: <a href="mailto:jose.rodriguez23B@udgvirtual.udg.mx">jose.rodriguez23B@udgvirtual.udg.mx</a>
+  </footer>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.remove("fade-out");
+  });
+
+  document.querySelectorAll("a").forEach(link => {
+    if (link.href && link.origin === location.origin) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const url = this.href;
+        document.body.classList.add("fade-out");
+        setTimeout(() => {
+          window.location.href = url;
+        }, 300);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

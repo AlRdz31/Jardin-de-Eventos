@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registros</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.95);
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    button.eliminar {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .contenedor {
+      padding: 30px;
+      max-width: 90%;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: white;
+    }
+
+    @keyframes fadeOutRow {
+  from {
+    opacity: 1;
+    transform: scale(1);
+    height: auto;
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+    height: 0;
+  }
+}
+
+tr.eliminando {
+  animation: fadeOutRow 0.5s forwards;
+}
+
+  </style>
+</head>
+<body class="fade-out">
+
+  <header>Jardín de Eventos “La Palapita”</header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="ubicacion.html">Ubicación</a></li>
+      <li><a href="registros.html">Registros</a></li>
+    </ul>
+  </nav>
+
+  <main class="contenedor">
+    <h2>Registros de Reservas</h2>
+    <table id="tablaRegistros">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Teléfono</th>
+          <th>Fecha</th>
+          <th>Comentarios</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <strong>La Palapita. Jardín de Eventos</strong><br>
+    Altamirano 204, Centro, 78700 Matehuala, S.L.P.<br>
+    Contacto: <a href="mailto:jose.rodriguez23B@udgvirtual.udg.mx">jose.rodriguez23B@udgvirtual.udg.mx</a>
+  </footer>
+
+  <script>
+
+    function cargarRegistros() {
+      const registros = JSON.parse(localStorage.getItem('registros')) || [];
+      const tbody = document.querySelector('#tablaRegistros tbody');
+      tbody.innerHTML = '';
+
+      registros.forEach((registro, index) => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+          <td>${registro.nombre}</td>
+          <td>${registro.correo}</td>
+          <td>${registro.telefono}</td>
+          <td>${registro.fecha}</td>
+          <td>${registro.comentarios || ''}</td>
+          <td><button class="eliminar" onclick="eliminarRegistro(${index})">Eliminar</button></td>
+        `;
+        tbody.appendChild(fila);
+      });
+    }
+
+  function eliminarRegistro(index) {
+    const registros = JSON.parse(localStorage.getItem('registros')) || [];
+    const tbody = document.querySelector('#tablaRegistros tbody');
+    const fila = tbody.rows[index];
+
+    fila.classList.add('eliminando');
+
+    setTimeout(() => {
+      registros.splice(index, 1);
+      localStorage.setItem('registros', JSON.stringify(registros));
+      cargarRegistros();
+    }, 500);
+  }
+
+    window.onload = cargarRegistros;
+
+  </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.remove("fade-out");
+  });
+
+  document.querySelectorAll("a").forEach(link => {
+    if (link.href && link.origin === location.origin) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const url = this.href;
+        document.body.classList.add("fade-out");
+        setTimeout(() => {
+          window.location.href = url;
+        }, 300);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

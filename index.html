@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Producto Integrador Alberto Rodriguez</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="fade-out">
+
+  <header>Jardín de Eventos “La Palapita”</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="ubicacion.html">Ubicación</a></li>
+    <li><a href="registros.html">Registros</a></li>
+  </ul>
+</nav>
+
+  <main>
+    <div class="form-container">
+      <h2>Reserva tu Evento</h2>
+      <form id="reservaForm" novalidate>
+        <div class="form-group">
+          <label for="nombre" id="labelNombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre">
+        </div>
+        <div class="form-group">
+          <label for="correo" id="labelCorreo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo">
+        </div>
+        <div class="form-group">
+          <label for="telefono" id="labelTelefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono">
+        </div>
+        <div class="form-group">
+          <label for="fecha" id="labelFecha">Fecha de reserva</label>
+          <input type="date" id="fecha" name="fecha">
+        </div>
+        <div class="form-group">
+          <label for="comentarios" id="labelComentarios">Comentarios</label>
+          <textarea id="comentarios" name="comentarios" rows="4"></textarea>
+        </div>
+        <button type="submit">Reservar</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <strong>La Palapita. Jardín de Eventos</strong><br>
+    Altamirano 204, Centro, 78700 Matehuala, S.L.P.<br>
+    Contacto: <a href="mailto:jose.rodriguez23B@udgvirtual.udg.mx">jose.rodriguez23B@udgvirtual.udg.mx</a>
+  </footer>
+
+<dialog id="notificacionDialog" class="custom-dialog">
+  <p id="mensajeDialogo"></p>
+  <button id="cerrarDialogo">Cerrar</button>
+</dialog>
+
+  <script src="script.js"></script>
+
+  <script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.remove("fade-out");
+  });
+
+  document.querySelectorAll("a").forEach(link => {
+    if (link.href && link.origin === location.origin) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const url = this.href;
+        document.body.classList.add("fade-out");
+        setTimeout(() => {
+          window.location.href = url;
+        }, 300);
+      });
+    }
+  });
+
+</script>
+
+</body>
+</html>
+
